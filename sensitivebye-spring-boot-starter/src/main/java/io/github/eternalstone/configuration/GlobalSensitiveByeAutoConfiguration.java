@@ -56,4 +56,14 @@ public class GlobalSensitiveByeAutoConfiguration {
         return sensitiveLogProvider;
     }
 
+    /**
+     * 配置mybatis脱敏开关，开则注入mybatis脱敏组件
+     */
+    @Bean
+    @ConditionalOnProperty(name = GlobalSensitiveByeProperties.PREFIX + ".mybatis.enabled", havingValue = "true")
+    public MybatisSensitiveByeConfiguration mybatisSensitiveByeConfiguration() {
+        return new MybatisSensitiveByeConfiguration();
+    }
+
+
 }

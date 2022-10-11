@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Import({GlobalSensitiveByeAutoConfiguration.class, MybatisSensitiveByeConfiguration.class})
+@Import(GlobalSensitiveByeAutoConfiguration.class)
 public @interface EnableGlobalSensitiveBye {
 
 }

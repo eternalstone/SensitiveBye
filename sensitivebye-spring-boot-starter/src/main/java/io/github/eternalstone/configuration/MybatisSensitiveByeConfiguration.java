@@ -1,8 +1,7 @@
 package io.github.eternalstone.configuration;
 
 import io.github.eternalstone.aop.MybatisSensitiveInterceptor;
-import io.github.eternalstone.properties.GlobalSensitiveByeProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisSensitiveByeConfiguration {
 
     @Bean
-    @ConditionalOnProperty(name = GlobalSensitiveByeProperties.PREFIX + ".mybatis.enabled", havingValue = "true")
+    @ConditionalOnMissingBean(MybatisSensitiveInterceptor.class)
     public MybatisSensitiveInterceptor mybatisSensitiveInterceptor() {
         return new MybatisSensitiveInterceptor();
     }
