@@ -61,6 +61,18 @@
 </dependency>
 ```
 
+> ​	包导不下来需要添加以下maven中央仓库：
+>
+> ```xml
+> <repositories>
+>    <repository>
+>       <id>maven-central</id>
+>       <name>Central Repository</name>
+>       <url>https://repo1.maven.apache.org/maven2</url>
+>    </repository>
+> </repositories>
+> ```
+
 
 
 #### 3.2 配置
