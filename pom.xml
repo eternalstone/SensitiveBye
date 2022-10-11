@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.eternalstone</groupId>
+    <groupId>io.github.eternalstone</groupId>
     <artifactId>sensitive-bye-parent</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -22,8 +22,8 @@
 
     <developers>
         <developer>
-            <name>eternalstone</name>
-            <email>13125101810@163.com</email>
+            <name>SensitiveBye</name>
+            <email>sensitivebye@163.com</email>
         </developer>
     </developers>
 
@@ -54,7 +54,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.eternalstone</groupId>
+                <groupId>io.github.eternalstone</groupId>
                 <artifactId>sensitivebye-core</artifactId>
                 <version>${project.version}</version>
             </dependency>

@@ -1,5 +1,5 @@
 # SensitiveBye
-![MavenCentral](https://img.shields.io/maven-central/v/com.github.eternalstone/sensitivebye-spring-boot-starter?style=flat-square)
+![MavenCentral](https://img.shields.io/maven-central/v/io.github.eternalstone/sensitivebye-spring-boot-starter?style=flat-square)
 ![Hex.pm](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)
 
 
@@ -43,7 +43,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.github.eternalstone</groupId>
+  <groupId>io.github.eternalstone</groupId>
   <artifactId>sensitivebye-spring-boot-starter</artifactId>
   <version>1.0.1</version>
 </dependency>
@@ -55,7 +55,7 @@
 
 ```xml
 <dependency>
-  <groupId>com.github.eternalstone</groupId>
+  <groupId>io.github.eternalstone</groupId>
   <artifactId>sensitivebye-core</artifactId>
   <version>1.0.1</version>
 </dependency>
@@ -191,7 +191,7 @@ public SensitiveLogProvider sensitiveFieldProvider(){
 ​		在logback.xml中添加如下配置即可：
 
 ```xml
-<conversionRule conversionWord="msg" converterClass ="com.github.eternalstone.attachment.log.converter.LogbackSensitiveConverter"/>
+<conversionRule conversionWord="msg" converterClass ="LogbackSensitiveConverter"/>
 ```
 
 
@@ -212,7 +212,7 @@ public SensitiveLogProvider sensitiveFieldProvider(){
 
 ##### 3.4.3 自定义日志脱敏规则
 
-​		SensitiveBye集成的默认日志脱敏规则见枚举类：com.github.eternalstone.enums.LoggerRule。
+​		SensitiveBye集成的默认日志脱敏规则见枚举类：LoggerRule。
 
 ​		如需添加或删除或自定义脱敏规则，实现`ISensitiveLogRule`接口的`custome(Map<String, SensitiveLogRuleWrapper> ruleMap)`方法即可，例如：
 

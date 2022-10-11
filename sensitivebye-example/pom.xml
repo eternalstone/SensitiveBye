@@ -66,7 +66,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.eternalstone</groupId>
+            <groupId>io.github.eternalstone</groupId>
             <artifactId>sensitivebye-spring-boot-starter</artifactId>
             <version>1.0.1</version>
         </dependency>

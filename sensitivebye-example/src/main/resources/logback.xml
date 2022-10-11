@@ -3,7 +3,7 @@
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
 
-    <conversionRule conversionWord="msg" converterClass ="com.github.eternalstone.attachment.log.converter.LogbackSensitiveConverter"/>
+    <conversionRule conversionWord="msg" converterClass ="io.github.eternalstone.attachment.log.converter.LogbackSensitiveConverter"/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">

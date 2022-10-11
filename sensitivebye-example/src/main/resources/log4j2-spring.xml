@@ -12,7 +12,7 @@
             <appender-ref ref="STDOUT" />
         </root>
 
-        <logger name="com.github.eternalstone" level="INFO" additivity="false">
+        <logger name="io.github.eternalstone" level="INFO" additivity="false">
             <appender-ref ref="STDOUT" />
         </logger>
     </loggers>
