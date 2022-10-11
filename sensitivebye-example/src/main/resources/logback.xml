@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <conversionRule conversionWord="msg" converterClass ="com.github.eternalstone.attachment.log.converter.LogbackSensitiveConverter"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) [%X{traceId}] %highlight(%-5level) %boldMagenta(%logger{10}) - %cyan(%msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

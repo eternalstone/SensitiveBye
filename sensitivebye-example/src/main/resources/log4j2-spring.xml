@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  status="WARN">
+
+    <appenders>
+        <console name="STDOUT" target="SYSTEM_OUT">
+            <patternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level ---- [%thread] %logger Line:%-3L - %sdmsg%n" />
+        </console>
+    </appenders>
+
+    <loggers>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+
+        <logger name="com.github.eternalstone" level="INFO" additivity="false">
+            <appender-ref ref="STDOUT" />
+        </logger>
+    </loggers>
+</configuration>

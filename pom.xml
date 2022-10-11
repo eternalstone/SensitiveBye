@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.eternalstone</groupId>
+    <artifactId>sensitive-bye-parent</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>SensitiveBye</name>
+    <description>A toolkit focused on data desensitization.</description>
+    <url>https://github.com/eternalstone/SensitiveBye</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>eternalstone</name>
+            <email>13125101810@163.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>sensitivebye-core</module>
+        <module>sensitivebye-spring-boot-starter</module>
+        <module>sensitivebye-example</module>
+    </modules>
+
+    <properties>
+        <revision>1.0.1</revision>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <slf4j.version>1.7.5</slf4j.version>
+        <jackson.version>2.13.3</jackson.version>
+        <fastjson.version>1.2.58</fastjson.version>
+        <aho-corasick-trie.version>1.2.3</aho-corasick-trie.version>
+        <springboot.version>2.2.6.RELEASE</springboot.version>
+        <spring.version>5.2.5.RELEASE</spring.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <log4j.version>2.17.2</log4j.version>
+        <logback.version>1.2.11</logback.version>
+        <yaml.version>1.30</yaml.version>
+        <flatten-maven-plugin.version>1.2.1</flatten-maven-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.eternalstone</groupId>
+                <artifactId>sensitivebye-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- slf4j -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- AhoCorasickDoubleArrayTrie -->
+            <dependency>
+                <groupId>com.hankcs</groupId>
+                <artifactId>aho-corasick-double-array-trie</artifactId>
+                <version>${aho-corasick-trie.version}</version>
+            </dependency>
+
+            <!-- spring-boot-starter -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${springboot.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <!-- spring-context -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!--log4j-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!--logback-->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <!--yaml-->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${yaml.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <target>8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten-maven-plugin.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: community
+    password: S6edZJV72WRJKb48
+    url: jdbc:mysql://pxc-shrb8yigduuv1t.public.polarx.rds.aliyuncs.com:3306/community_base?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+
+mybatis:
+  mapper-locations:
+    - classpath:mybatis/*.xml
+    - classpath:mybatis/*/*.xml
+
+sensitive-bye:
+  mybatis:
+    enabled: true
+password: aaabbbccc
+test: 123
