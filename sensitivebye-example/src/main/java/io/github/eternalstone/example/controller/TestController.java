@@ -2,11 +2,13 @@ package io.github.eternalstone.example.controller;
 
 import io.github.eternalstone.example.entity.User;
 import io.github.eternalstone.provider.SensitiveWordProvider;
+import io.github.eternalstone.tools.SensitiveFileUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,6 +36,14 @@ public class TestController {
     @GetMapping("/sensitive")
     public List<String> sensitive(String msg){
         return sensitiveWordProvider.contain(msg);
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        String source = "E:\\cloud_workspace\\SensitiveBye\\sensitivebye-example\\src\\main\\resources\\application.yml";
+        String string = SensitiveFileUtil.sensitiveByeToString(source);
+        System.out.println(string);
+        SensitiveFileUtil.sensitiveByeToFile(source, source);
     }
 
 }

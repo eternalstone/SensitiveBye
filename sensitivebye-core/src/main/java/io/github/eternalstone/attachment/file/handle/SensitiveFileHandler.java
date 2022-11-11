@@ -34,6 +34,7 @@ public class SensitiveFileHandler extends AbstractFileHandler {
         //spring相关
         keys.add("spring.datasource.username");
         keys.add("spring.datasource.password");
+        keys.add("spring.datasource.url");
         keys.add("spring.redis.username");
         keys.add("spring.redis.password");
         keys.add("spring.elasticsearch.username");
@@ -53,12 +54,30 @@ public class SensitiveFileHandler extends AbstractFileHandler {
         for (Object key : map.keySet()) {
             Object v = map.get(key);
             if (v instanceof String || v instanceof Integer) {
-                if (keys.stream().anyMatch(k -> key.toString().contains(k))) {
+                if (keys.stream().anyMatch(k -> k.equals(key.toString()))) {
                     map.put(key.toString(), "******");
                 }
             }
             if(v instanceof Map){
-                subFilter((Map<String, Object>) v);
+                subFilter((Map<String, Object>) v, key.toString());
+            }
+        }
+    }
+
+    private void subFilter(Map<String, Object> map, String prefix){
+        for (Object key : map.keySet()) {
+            Object v = map.get(key);
+            if (v instanceof String || v instanceof Integer) {
+                StringBuilder builder = new StringBuilder(prefix);
+                builder.append(".").append(key.toString());
+                if (keys.stream().anyMatch(k -> k.contains(builder.toString()))) {
+                    map.put(key.toString(), "******");
+                }
+            }
+            if(v instanceof Map){
+                StringBuilder builder = new StringBuilder(prefix);
+                builder.append(".").append(key.toString());
+                subFilter((Map<String, Object>) v, builder.toString());
             }
         }
     }
