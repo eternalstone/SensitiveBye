@@ -62,6 +62,10 @@ public class SensitiveLogRuleWrapper implements Serializable {
         return prefixs.stream().anyMatch(prefix -> str.contains(prefix));
     }
 
+    public boolean existsPrefixs(){
+        return prefixs != null && prefixs.size() > 0;
+    }
+
     public void buildPrefixs() {
         Set<String> prefixSet = new HashSet<>();
         keys.forEach(key -> {

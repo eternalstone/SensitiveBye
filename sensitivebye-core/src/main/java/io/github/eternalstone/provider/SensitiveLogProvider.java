@@ -5,6 +5,7 @@ import io.github.eternalstone.attachment.log.converter.ISensitiveConverter;
 import io.github.eternalstone.enums.LoggerRule;
 import io.github.eternalstone.enums.LoggerType;
 import io.github.eternalstone.provider.model.SensitiveLogRuleWrapper;
+import io.github.eternalstone.tools.StringUitl;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,7 +25,6 @@ public class SensitiveLogProvider implements ISensitiveLogProvider {
     private final Map<String, SensitiveLogRuleWrapper> ruleMap = initRule();
 
     private SensitiveLogProvider() {
-        buildLogRulePrefixs(ruleMap);
         LoggerType loggerType = getLoggerType();
         ISensitiveConverter converter = ISensitiveConverter.converterMap.get(loggerType);
         if (converter != null) {
@@ -34,8 +34,19 @@ public class SensitiveLogProvider implements ISensitiveLogProvider {
 
     public void setSensitiveRule(ISensitiveLogRule sensitiveRule) {
         if (sensitiveRule != null) {
+            //应用自定义规则
             sensitiveRule.custome(ruleMap);
-            buildLogRulePrefixs(ruleMap);
+            //自定义规则构造
+            for (SensitiveLogRuleWrapper logRule : ruleMap.values()) {
+                if (!logRule.existsPrefixs()) {
+                    logRule.buildPrefixs();
+                    String regex = logRule.getPattern().toString();
+                    String keys = StringUitl.join(logRule.getKeys(), "|");
+                    String separators = StringUitl.join(logRule.getSeparators(), "|");
+                    Pattern compile = Pattern.compile("(" + keys + ")" + "(" + separators + ")" + regex);
+                    logRule.setPattern(compile);
+                }
+            }
         }
     }
 
@@ -54,21 +65,10 @@ public class SensitiveLogProvider implements ISensitiveLogProvider {
                     Pattern.compile("(" + loggerRule.getKeys() + ")" + "(" + loggerRule.getSeparators() + ")" + loggerRule.getRegex()),
                     loggerRule.getReplacement()
             );
+            logRule.buildPrefixs();
             ruleMap.put(logRule.getName(), logRule);
         }
         return ruleMap;
-    }
-
-    /**
-     * 构建匹配规则前缀
-     */
-    private void buildLogRulePrefixs(Map<String, SensitiveLogRuleWrapper> ruleMap) {
-        if (ruleMap.isEmpty()) {
-            return;
-        }
-        for (SensitiveLogRuleWrapper logRule : ruleMap.values()) {
-            logRule.buildPrefixs();
-        }
     }
 
     public static SensitiveLogProvider instance() {

@@ -1,17 +1,13 @@
 server:
   port: 8080
-spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: '******'
-    password: '******'
-    url: '******'
 mybatis:
   mapper-locations:
   - classpath:mybatis/*.xml
   - classpath:mybatis/*/*.xml
 sensitive-bye:
   mybatis:
+    enabled: true
+  log:
     enabled: true
 password: '******'
 test: 123

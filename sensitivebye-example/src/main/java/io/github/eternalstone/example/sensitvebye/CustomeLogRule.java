@@ -33,8 +33,8 @@ public class CustomeLogRule implements ISensitiveLogRule {
             add("\\[");
         }});
         //正则表达式
-        wrapper.setPattern(Pattern.compile("^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}+$"));
-        //替换表达式，注意需要带上匹配词和分隔符的占位符
+        wrapper.setPattern(Pattern.compile("([a-zA-Z]{1})([-_a-zA-Z0-9]{5,19}+$)"));
+        //替换表达式，注意需要带上匹配词和分隔符的占位符 $1表示keys, $2表示分隔符，后续就是对内容的拆分和替换
         wrapper.setReplacement("$1$2$3*******");
         //新增规则
         ruleMap.put(wrapper.getName(), wrapper);

@@ -1,6 +1,9 @@
 package io.github.eternalstone.tools;
 
 
+import java.util.Iterator;
+import java.util.Objects;
+
 /**
  * 挪用commons-lang包的StringUitls对字符串做处理
  *
@@ -230,6 +233,41 @@ public class StringUitl {
                 }
                 return buf.toString();
         }
+    }
+
+    public static String join(Iterator<?> iterator, String separator) {
+        if (iterator == null) {
+            return null;
+        } else if (!iterator.hasNext()) {
+            return "";
+        } else {
+            Object first = iterator.next();
+            if (!iterator.hasNext()) {
+                return Objects.toString(first, "");
+            } else {
+                StringBuilder buf = new StringBuilder(256);
+                if (first != null) {
+                    buf.append(first);
+                }
+
+                while(iterator.hasNext()) {
+                    if (separator != null) {
+                        buf.append(separator);
+                    }
+
+                    Object obj = iterator.next();
+                    if (obj != null) {
+                        buf.append(obj);
+                    }
+                }
+
+                return buf.toString();
+            }
+        }
+    }
+
+    public static String join(Iterable<?> iterable, String separator) {
+        return iterable == null ? null : join(iterable.iterator(), separator);
     }
 
     private static String padding(int repeat, char padChar) throws IndexOutOfBoundsException {
