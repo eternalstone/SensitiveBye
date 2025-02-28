@@ -45,7 +45,7 @@
 <dependency>
   <groupId>io.github.eternalstone</groupId>
   <artifactId>sensitivebye-spring-boot-starter</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
@@ -57,7 +57,7 @@
 <dependency>
   <groupId>io.github.eternalstone</groupId>
   <artifactId>sensitivebye-core</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 

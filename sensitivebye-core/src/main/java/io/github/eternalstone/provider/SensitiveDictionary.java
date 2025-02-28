@@ -16,10 +16,10 @@ import java.util.TreeMap;
  */
 public class SensitiveDictionary {
 
-    private static AhoCorasickDoubleArrayTrie<String> trie;
+    private AhoCorasickDoubleArrayTrie<String> trie;
 
 
-    protected static List<AhoCorasickDoubleArrayTrie.Hit<String>> handle(NoArgsFunction func, String word) {
+    protected List<AhoCorasickDoubleArrayTrie.Hit<String>> handle(NoArgsFunction func, String word) {
         if (StringUitl.isBlank(word)) {
             throw new SensitiveByeException("The word is not allowed null or ''");
         }
@@ -30,18 +30,18 @@ public class SensitiveDictionary {
     }
 
 
-    protected static void reload(NoArgsFunction func) {
+    protected void reload(NoArgsFunction func) {
         trie = load((List<String>) func.apply());
     }
 
 
-    private static AhoCorasickDoubleArrayTrie<String> load(List<String> words) {
+    private AhoCorasickDoubleArrayTrie<String> load(List<String> words) {
         if (words == null || words.isEmpty()) {
             throw new SensitiveByeException("Failed to load sensitive words");
         }
         AhoCorasickDoubleArrayTrie<String> arrayTrie = new AhoCorasickDoubleArrayTrie<>();
         Map<String, String> treeMap = new TreeMap<>();
-        words.parallelStream().forEach(word -> {
+        words.forEach(word -> {
             treeMap.put(word, word);
         });
         arrayTrie.build(treeMap);
