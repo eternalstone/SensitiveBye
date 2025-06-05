@@ -268,11 +268,21 @@ public class CustomeLogRule implements ISensitiveLogRule {
 ​		`SensitiveBye`的mybatis脱敏组件是`MybatisSensitiveInterceptor`，它是基于Mybatis拦截器实现的。SpringBoot项目配置`sensitive-bye.mybatis.enabled=true`自动注入此组件，其他java项目需要初始化此组件：
 
 ```java
-@Bean
-public MybatisSensitiveInterceptor mybatisSensitiveInterceptor() {
-	return new MybatisSensitiveInterceptor();
+@Configuration
+public class MybatisConfig {
+  @Bean
+  public ConfigurationCustomizer mybatisConfigurationCustomizer() {
+    return new ConfigurationCustomizer() {
+      @Override
+      public void customize(Configuration configuration) {
+        configuration.addInterceptor(new MybatisInterceptor());
+      }
+    };
+  }
 }
 ```
+
+> 注：通过@Bean将mybatis拦截器加载到spring容器可能在不同环境下会失效，这里稳妥的做法是将拦截器添加到mybatis拦截器配置中
 
 ​		mybatis数据库字段脱敏用到了两个核心注解`@EnableCipher`和`@CipherField`:
 
@@ -298,7 +308,7 @@ public class User
 
 >  ​	1.@SensitiveBye注解和@CipherField注解虽然都是标注在对象属性上的，但是两个注解的作用互不影响，可以叠加使用，例如手机号从数据库密文查出来解密成明文，再用@SensitiveBye(strategy = SensitiveType.MOBILE)将明文手机号打上掩码。
 
-> ​	2.如果项目中存在多个Mybatis拦截器，需要指定拦截器的执行顺序，可以写个配置类：
+> ​	2.如果项目中存在多个Mybatis拦截器，需要指定拦截器的执行顺序，可以写个配置类以此添加：
 
 ```java
 @Configuration

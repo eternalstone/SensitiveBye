@@ -1,7 +1,6 @@
 package io.github.eternalstone.annotation;
 
 import io.github.eternalstone.configuration.GlobalSensitiveByeAutoConfiguration;
-import io.github.eternalstone.configuration.MybatisSensitiveByeConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

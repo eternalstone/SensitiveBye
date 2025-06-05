@@ -4,10 +4,12 @@ mybatis:
   mapper-locations:
   - classpath:mybatis/*.xml
   - classpath:mybatis/*/*.xml
+
 sensitive-bye:
   mybatis:
     enabled: true
   log:
-    enabled: true
+    enabled: false
 password: '******'
 test: 123
+

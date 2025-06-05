@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Justzone on 2022/9/4 14:30
  */
 @EnableConfigurationProperties(GlobalSensitiveByeProperties.class)
+@ComponentScan("io.github.eternalstone.configuration")
 @Configuration
 public class GlobalSensitiveByeAutoConfiguration {
 
@@ -56,14 +58,6 @@ public class GlobalSensitiveByeAutoConfiguration {
         return sensitiveLogProvider;
     }
 
-    /**
-     * 配置mybatis脱敏开关，开则注入mybatis脱敏组件
-     */
-    @Bean
-    @ConditionalOnProperty(name = GlobalSensitiveByeProperties.PREFIX + ".mybatis.enabled", havingValue = "true")
-    public MybatisSensitiveByeConfiguration mybatisSensitiveByeConfiguration() {
-        return new MybatisSensitiveByeConfiguration();
-    }
 
 
 }
